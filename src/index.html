@@ -7,10 +7,10 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 <body>
 	<div id="map"></div>
-	<div class="records-panel">
-		<input type="text" data-bind="textInput: search">
-		<ul class="records-list" data-bind="foreach: restaurants">
-			<li class="records-item" data-bind="text: id"></li>
+	<div class="place-panel">
+		<input type="search" class="search" placeholder="Search" data-bind="textInput: search">
+		<ul class="place-list" data-bind="foreach: places">
+			<li class="place-item" data-bind="click: $parent.clickHandler, text: name, visible: visible"></li>
 		</ul>
 	</div>
 	<div class="loading" data-bind="visible: isLoading">Loading places<div>
