@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Veggie Restaurants</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+<body>
+	<div id="map"></div>
+	<div class="records-panel">
+		<input type="text" data-bind="textInput: search">
+		<ul class="records-list" data-bind="foreach: restaurants">
+			<li class="records-item" data-bind="text: id"></li>
+		</ul>
+	</div>
+	<div class="loading" data-bind="visible: isLoading">Loading places<div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3ZcJ2NJwy4_BBtVcAyefP3vyM_bEF4Ts&libraries=places&callback=initMap" async defer></script>
+	<script src="js/app.js"></script>
+</body>
+</html>
