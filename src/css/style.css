@@ -31,12 +31,22 @@ html, body {
 }
 .place-item {
 	padding: 10px;
+	color: #999;
 	cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .place-item:hover {
 	background: #ccc;
 }
-.loading {
+.place-name {
+	color: #000;
+}
+.place-address {
+	font-size: 12px;
+	white-space: nowrap;
+}
+#message {
 	position: absolute;
 	bottom: 10px;
 	left: 50%;

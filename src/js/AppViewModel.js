@@ -6,7 +6,7 @@ function AppViewModel() {
 
   // Defining properties
   self.places = ko.observableArray([]);
-  self.isLoading = ko.observable(true);
+  self.message = ko.observable('Loading places');
   self.search = ko.observable('');
 
   /*
@@ -31,18 +31,15 @@ function AppViewModel() {
     });
   });
 
-  // XMLHttpRequest to get the JSON data with all places
-  var getPlaces = new XMLHttpRequest();
-  getPlaces.open('GET', 'data/data.json');
-  getPlaces.onreadystatechange = function() {
-    if (getPlaces.readyState === XMLHttpRequest.DONE) {
-      if (getPlaces.status === 200) {
-        JSON.parse(getPlaces.responseText).forEach(function(data) {
-          self.places.push(new Place(data));
-        });
-        self.isLoading(false);
-      }
-    }
-  }
-  getPlaces.send();
+  // fetch request to get the JSON data with all places
+  fetch('data/data.json').then(function(response) {
+    return response.json();
+  }).then(function(data) {
+    data.forEach(function(data) {
+      self.places.push(new Place(data));
+    });
+  }).catch(function(err) {
+    self.message('A problem occurred when loading the places');
+  });
+
 }

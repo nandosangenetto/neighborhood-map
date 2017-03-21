@@ -4,18 +4,21 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Veggie Restaurants</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css">
 <body>
-	<div id="map"></div>
-	<div class="place-panel">
+	<main id="map"></main>
+	<aside class="place-panel">
 		<input type="search" class="search" placeholder="Search" data-bind="textInput: search">
 		<ul class="place-list" data-bind="foreach: places">
-			<li class="place-item" data-bind="click: $parent.clickHandler, text: name, visible: visible"></li>
+			<li class="place-item" data-bind="click: $parent.clickHandler, visible: visible">
+				<span class="place-name" data-bind="text: name"></span>
+				<span class="place-address" data-bind="text: address"></span>
+			</li>
 		</ul>
-	</div>
-	<div class="loading" data-bind="visible: isLoading">Loading places<div>
+	</aside>
+	<div id="message" data-bind="visible: (message.length > 0), text: message">Loading places<div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3ZcJ2NJwy4_BBtVcAyefP3vyM_bEF4Ts&libraries=places&callback=initMap" async defer></script>
 	<script src="js/app.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3ZcJ2NJwy4_BBtVcAyefP3vyM_bEF4Ts&libraries=places&callback=initMap&onerror=errorMap()" async defer></script>
 </body>
 </html>

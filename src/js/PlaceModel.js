@@ -16,9 +16,6 @@ function Place(obj) {
   // Defining visible property as observable
   self.visible = ko.observable(true);
 
-  // Instantiating the InfoWindow
-  self.infoWindow = new google.maps.InfoWindow({maxWidth: 250});
-
   // Instantiating the Marker
   self.marker = new google.maps.Marker({
     map: map,
@@ -40,11 +37,45 @@ function Place(obj) {
   self.showWindow = function() {
     var content = '<strong>' + self.name + '</strong><br>';
         content += self.address;
+
         if(typeof self.website !== 'undefined')
           content += '<br><br><a href="' + self.website + '" target="_blank">' + self.website + '</a>';
 
-    self.infoWindow.setContent(content);
-    self.infoWindow.open(map, self.marker);
+        loading = '<br><br>Loading contact informations...';
+    
+    self.getInfoFromFoursquare(content);
+
+    infoWindow.setContent(content+loading);
+    infoWindow.open(map, self.marker);
+  };
+
+  /* 
+    getInfoFromFoursquare get contact info from Foursquare if it exists
+  */
+  self.getInfoFromFoursquare = function(content) {
+    var url = 'https://api.foursquare.com/v2/venues/search?ll=' + self.lat + ',' + self.lng + '&query=' + self.name + '&client_id=IRY4XRFVZBIOBSJLKGYIOVJQLK3FN3VPPN0UMVRMVL2BA5RR&client_secret=X2ETPP3KI2QG3RYAEJBLCRGQ2P5NHHEF0QB40XX4BOBNUUVT&v=20170321';
+
+    fetch(url)
+      .then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        content += '<br>';
+
+        var contactInfo = data.response.venues[0].contact;
+
+        if(typeof contactInfo.formmattedPhone != "undefined")
+          content += '<br>Phone: ' + contactInfo.formattedPhone;
+
+        if(typeof contactInfo.twitter != "undefined")
+          content += '<br>Twitter: @' + contactInfo.twitter;
+
+        if(typeof contactInfo.facebookUsername != "undefined")
+          content += '<br>Facebook: @' + contactInfo.facebookUsername;
+
+        infoWindow.setContent(content);
+      }).catch(function (error) {
+        console.log(error);
+      });
   };
 
   /*
@@ -56,9 +87,8 @@ function Place(obj) {
     self.marker.setAnimation(google.maps.Animation.BOUNCE);
     map.panTo(self.location);
 
-    if (Place.prototype.active && Place.prototype.active !== self) {
+    if (Place.prototype.active && Place.prototype.active !== self)
       Place.prototype.active.deactivate();
-    }
 
     Place.prototype.active = self;
   };
@@ -68,33 +98,18 @@ function Place(obj) {
   */
   self.deactivate = function() {
     self.marker.setAnimation(null);
-    self.infoWindow.close();
-
     Place.prototype.active = null;
-  };
-
-  /*
-    closeHandler method with behaviours when InfoWindow is closed
-  */
-  self.closeHandler = function() {
-      self.deactivate();
   };
 
   /*
     openHandler method with behaviours when Place is selected
   */
   self.openHandler = function() {
-
-    if(Place.prototype.active === self) {
-      self.deactivate();
-    } else {
+    if(Place.prototype.active !== self)
       self.activate();
-    }
-
   };
 
   self.marker.addListener('click', self.openHandler);
-  self.infoWindow.addListener('closeclick', self.closeHandler);
 
 }
 
