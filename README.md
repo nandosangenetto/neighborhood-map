@@ -12,4 +12,4 @@ If you want to change the app or make you own, change the data.json to display y
 
 ## Running
 * Run `gulp` to compile the project and serve
-* Access the project through http://localhost:8787/ address if you didn't change the port
+* Access the project via http://localhost:8787/ address, if you haven't changed the port
