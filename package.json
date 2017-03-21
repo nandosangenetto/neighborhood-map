@@ -20,13 +20,11 @@
     "colors": "^1.1.2",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.0.2",
+    "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.0.0",
     "gulp-htmlmin": "^3.0.0",
-    "gulp-imagemin": "^3.1.1",
+    "gulp-jsonminify": "^1.0.0",
     "gulp-uglify": "^2.0.1",
-    "gulp-webp": "^2.3.0",
-    "ngrok": "^2.2.6",
-    "psi": "^3.0.0",
     "uglify-js": "^2.7.5"
   }
 }
