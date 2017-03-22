@@ -38,10 +38,10 @@ function Place(obj) {
     var content = '<strong>' + self.name + '</strong><br>';
         content += self.address;
 
-        if(typeof self.website !== 'undefined')
-          content += '<br><br><a href="' + self.website + '" target="_blank">' + self.website + '</a>';
+    if(typeof self.website !== 'undefined')
+      content += '<br><br><a href="' + self.website + '" target="_blank">' + self.website + '</a>';
 
-        loading = '<br><br>Loading contact informations...';
+    loading = '<br><br>Loading contact informations...';
     
     self.getInfoFromFoursquare(content);
 
@@ -59,22 +59,18 @@ function Place(obj) {
       .then(function (response) {
         return response.json();
       }).then(function (data) {
-        content += '<br>';
-
         var contactInfo = data.response.venues[0].contact;
-
-        if(typeof contactInfo.formmattedPhone != "undefined")
-          content += '<br>Phone: ' + contactInfo.formattedPhone;
-
-        if(typeof contactInfo.twitter != "undefined")
-          content += '<br>Twitter: @' + contactInfo.twitter;
-
-        if(typeof contactInfo.facebookUsername != "undefined")
-          content += '<br>Facebook: @' + contactInfo.facebookUsername;
-
+        content += '<br>';
+        content += (typeof contactInfo.formmattedPhone != "undefined") ? '<br>Phone: ' + contactInfo.formattedPhone : '';
+        content += (typeof contactInfo.twitter != "undefined") ? '<br>Twitter: @' + contactInfo.twitter : '';
+        content += (typeof contactInfo.facebookUsername != "undefined") ? '<br>Facebook: @' + contactInfo.facebookUsername : '';
         infoWindow.setContent(content);
       }).catch(function (error) {
-        console.log(error);
+          app.message('An error occurred when loading info from Foursquare');
+          setTimeout(function() {
+            app.message('');
+          }, 3000);
+          infoWindow.setContent(content);
       });
   };
 

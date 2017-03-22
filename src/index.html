@@ -3,8 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#000000">
 	<title>Veggie Restaurants</title>
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="shortcut icon" type="image/png" href="img/favicon.png">
 <body>
 	<main id="map"></main>
 	<aside class="place-panel">
@@ -16,9 +18,9 @@
 			</li>
 		</ul>
 	</aside>
-	<div id="message" data-bind="visible: (message.length > 0), text: message">Loading places<div>
+	<div id="message" data-bind="visible: (message().length > 0), text: message">Loading map<div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
 	<script src="js/app.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3ZcJ2NJwy4_BBtVcAyefP3vyM_bEF4Ts&libraries=places&callback=initMap&onerror=errorMap()" async defer></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3ZcJ2NJwy4_BBtVcAyefP3vyM_bEF4Ts&libraries=places&callback=initMap" onerror="errorMap()" async defer></script>
 </body>
 </html>
