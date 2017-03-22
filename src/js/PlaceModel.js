@@ -94,6 +94,7 @@ function Place(obj) {
   */
   self.deactivate = function() {
     self.marker.setAnimation(null);
+    infoWindow.close();
     Place.prototype.active = null;
   };
 
