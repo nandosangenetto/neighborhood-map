@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="shortcut icon" type="image/png" href="/img/favicon.png">
 <body>
-	<main id="map"></main>
+	<main id="map" class="map-canvas"></main>
 	<aside class="place-panel">
 		<input type="search" class="search" placeholder="Search" data-bind="textInput: search">
 		<ul class="place-list" data-bind="foreach: places">
@@ -19,9 +19,9 @@
 		</ul>
 	</aside>
 	<a href="https://github.com/nandosangenetto/neighborhood-map" target="_blank" class="floating-icon">
-		<img src="/img/github-icon.png" width="32" height="32">
+		<img src="/img/github-icon.png" width="32" height="32" alt="See my Github repository">
 	</a>
-	<div id="message" data-bind="visible: (message().length > 0), text: message">Loading map<div>
+	<div class="message" data-bind="visible: (message().length > 0), text: message">Loading map</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
 	<script src="/js/app.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3ZcJ2NJwy4_BBtVcAyefP3vyM_bEF4Ts&libraries=places&callback=initMap" onerror="errorMap()" async defer></script>

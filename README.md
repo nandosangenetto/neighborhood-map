@@ -1,7 +1,7 @@
 # Veggie Restaurants
 
 ## The project
-This project is inspired in the Udacity's neighborhood map project, that we must to create a responsible map using the Google Map API and Knockout.js.
+This project is inspired in the Udacity's neighborhood map project, that we must to create a responsible map using the Google Map API, Foursquare API and Knockout.js.
 
 ## Functionalities
 The app shows all veggie restaurants in Rio de Janeiro. You can filter dinamically the restaurants filling the search box.

@@ -53,17 +53,35 @@ function Place(obj) {
     getInfoFromFoursquare get contact info from Foursquare if it exists
   */
   self.getInfoFromFoursquare = function(content) {
-    var url = 'https://api.foursquare.com/v2/venues/search?ll=' + self.lat + ',' + self.lng + '&query=' + self.name + '&client_id=IRY4XRFVZBIOBSJLKGYIOVJQLK3FN3VPPN0UMVRMVL2BA5RR&client_secret=X2ETPP3KI2QG3RYAEJBLCRGQ2P5NHHEF0QB40XX4BOBNUUVT&v=20170321';
+    var url = 'https://api.foursquare.com/v2/venues/search'
+        url += '?ll=' + self.lat + ',' + self.lng;
+        url += '&query=' + self.name;
+        url += '&client_id=IRY4XRFVZBIOBSJLKGYIOVJQLK3FN3VPPN0UMVRMVL2BA5RR';
+        url += '&client_secret=X2ETPP3KI2QG3RYAEJBLCRGQ2P5NHHEF0QB40XX4BOBNUUVT';
+        urk += '&v=20170321';
 
     fetch(url)
       .then(function (response) {
         return response.json();
       }).then(function (data) {
+        if(data.response.venues.length == 0) {
+          infoWindow.setContent(content);
+          return;
+        }
         var contactInfo = data.response.venues[0].contact;
         content += '<br>';
-        content += (typeof contactInfo.formmattedPhone != "undefined") ? '<br>Phone: ' + contactInfo.formattedPhone : '';
-        content += (typeof contactInfo.twitter != "undefined") ? '<br>Twitter: @' + contactInfo.twitter : '';
-        content += (typeof contactInfo.facebookUsername != "undefined") ? '<br>Facebook: @' + contactInfo.facebookUsername : '';
+        
+        if(typeof contactInfo.formmattedPhone != "undefined")
+          content +=  ? '<br>Phone: ' + contactInfo.formattedPhone;
+
+        if(typeof contactInfo.twitter != "undefined")
+          content +=  ? '<br>Twitter: <a href="http://twitter.com/' + contactInfo.twitter + '" target="_blank">@' + contactInfo.twitter + '</a>';
+
+        if(typeof contactInfo.facebookUsername != "undefined")
+          content +=  ? '<br>Facebook: <a href="http://fb.com/' + contactInfo.facebookUsername + '" target="_blank">' + contactInfo.facebookUsername + '</a>';
+
+        content += '<br>Foursquare: <a href="https://foursquare.com/venue/' + data.response.venues[0].id + '" target="_blank">' + data.response.venues[0].name + '</a>';
+
         infoWindow.setContent(content);
       }).catch(function (error) {
           app.message('An error occurred when loading info from Foursquare');
