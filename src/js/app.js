@@ -6,7 +6,6 @@ var app = new AppViewModel();
    update the localStorage with current position
 */
 function initMap() {
-  console.log('hasiudahiudhauda');
   var storageState = localStorage.getItem("state");
   var state = (storageState === null) ? {lat: -22.9020102, lng: -43.2562987, zoom: 12} : JSON.parse(storageState);
 

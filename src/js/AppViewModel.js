@@ -23,13 +23,13 @@ function AppViewModel() {
     which corresponds the search terms
   */
   self.searchResult = ko.computed(function() {
-    // self.places().forEach(function(place) {
-    //   if(place.name.toLowerCase().indexOf(self.search().toLowerCase() ) >= 0) {
-    //     place.setVisible(true);
-    //   } else {
-    //     place.setVisible(false);
-    //   }
-    // });
+    self.places().forEach(function(place) {
+      if(place.name.toLowerCase().indexOf(self.search().toLowerCase() ) >= 0) {
+        place.setVisible(true);
+      } else {
+        place.setVisible(false);
+      }
+    });
   });
 
   self.getPlacesData = function() {

@@ -55,7 +55,7 @@ gulp.task('minify-json', () => {
 // Subtask to move images to public folder
 gulp.task('move-images', () => {
   console.log('Moving images'.cyan);
-  return gulp.src(srcPath + '/img/*.{png|jpg|gif}')
+  return gulp.src(srcPath + '/img/*.{png,jpg,gif}')
     .pipe(gulp.dest(publicPath + '/img'));
 });
 
