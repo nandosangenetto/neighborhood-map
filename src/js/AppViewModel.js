@@ -22,16 +22,23 @@ function AppViewModel() {
     seachResult method to display only the results
     which corresponds the search terms
   */
-  self.searchResult = ko.computed(function() {
-    self.places().forEach(function(place) {
-      if(place.name.toLowerCase().indexOf(self.search().toLowerCase() ) >= 0) {
-        place.setVisible(true);
-      } else {
-        place.setVisible(false);
-      }
+  self.initiateSearch = function() {
+    self.searchResult = ko.computed(function() {
+      infoWindow.close();
+      self.places().forEach(function(place) {
+        if(place.name.toLowerCase().indexOf(self.search().toLowerCase() ) >= 0) {
+          place.setVisible(true);
+        } else {
+          place.setVisible(false);
+        }
+      });
     });
-  });
+  };
 
+  /*
+    We'll get all the places data from JSON 
+    and instantiate a new Place
+  */
   self.getPlacesData = function() {
     self.message('Loading places');
     // fetch request to get the JSON data with all places
@@ -48,12 +55,12 @@ function AppViewModel() {
   };
 
   /*
-    if map is loaded, we'll get all the places data from 
-    JSON and instantiate a new Place
+    if map is loaded, we'll start the app funcionalities
   */
   self.isMapLoaded.subscribe(function(newValue) {
     if(newValue) {
       self.getPlacesData();
+      self.initiateSearch();
     }
   });
 
