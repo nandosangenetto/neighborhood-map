@@ -53,7 +53,7 @@ function Place(obj) {
     getInfoFromFoursquare get contact info from Foursquare if it exists
   */
   self.getInfoFromFoursquare = function(content) {
-    var url = 'https://api.foursquare.com/v2/venues/search'
+    var url = 'https://api.foursquare.com/v2/venues/search';
         url += '?ll=' + self.lat + ',' + self.lng;
         url += '&query=' + self.name;
         url += '&client_id=IRY4XRFVZBIOBSJLKGYIOVJQLK3FN3VPPN0UMVRMVL2BA5RR';
@@ -70,15 +70,15 @@ function Place(obj) {
         }
         var contactInfo = data.response.venues[0].contact;
         content += '<br>';
-        
+
         if(typeof contactInfo.formmattedPhone != "undefined")
-          content +=  ? '<br>Phone: ' + contactInfo.formattedPhone;
+          content += '<br>Phone: ' + contactInfo.formattedPhone;
 
         if(typeof contactInfo.twitter != "undefined")
-          content +=  ? '<br>Twitter: <a href="http://twitter.com/' + contactInfo.twitter + '" target="_blank">@' + contactInfo.twitter + '</a>';
+          content += '<br>Twitter: <a href="http://twitter.com/' + contactInfo.twitter + '" target="_blank">@' + contactInfo.twitter + '</a>';
 
         if(typeof contactInfo.facebookUsername != "undefined")
-          content +=  ? '<br>Facebook: <a href="http://fb.com/' + contactInfo.facebookUsername + '" target="_blank">' + contactInfo.facebookUsername + '</a>';
+          content += '<br>Facebook: <a href="http://fb.com/' + contactInfo.facebookUsername + '" target="_blank">' + contactInfo.facebookUsername + '</a>';
 
         content += '<br>Foursquare: <a href="https://foursquare.com/venue/' + data.response.venues[0].id + '" target="_blank">' + data.response.venues[0].name + '</a>';
 
