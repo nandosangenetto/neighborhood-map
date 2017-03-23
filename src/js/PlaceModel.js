@@ -58,7 +58,7 @@ function Place(obj) {
         url += '&query=' + self.name;
         url += '&client_id=IRY4XRFVZBIOBSJLKGYIOVJQLK3FN3VPPN0UMVRMVL2BA5RR';
         url += '&client_secret=X2ETPP3KI2QG3RYAEJBLCRGQ2P5NHHEF0QB40XX4BOBNUUVT';
-        urk += '&v=20170321';
+        url += '&v=20170321';
 
     fetch(url)
       .then(function (response) {
